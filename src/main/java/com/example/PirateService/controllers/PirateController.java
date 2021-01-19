@@ -1,8 +1,10 @@
-package com.example.PirateService.cntrollers;
+package com.example.PirateService.controllers;
 
 import com.example.PirateService.models.Pirate;
 import com.example.PirateService.repositories.PirateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,13 +17,13 @@ public class PirateController {
     PirateRepository pirateRepository;
 
     @GetMapping(value = "/pirates")
-    public List<Pirate> getAllPirates(){
-        return pirateRepository.findAll();
+    public ResponseEntity<List<Pirate>> getAllPirates() {
+        return new ResponseEntity<>(pirateRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/pirates/{id}")
-    public Optional<Pirate> getPirate(@PathVariable Long id) {
-        return pirateRepository.findById(id);
+    public ResponseEntity getPirate(@PathVariable Long id) {
+        return new ResponseEntity<>(pirateRepository.findById(id), HttpStatus.OK);
     }
 
 }

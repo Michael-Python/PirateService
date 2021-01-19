@@ -1,5 +1,8 @@
 package com.example.PirateService.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +27,12 @@ public class Pirate {
 
     @ManyToOne
     @JoinColumn(name = "ship", nullable = false)
+    @JsonIgnoreProperties({"pirates"})
     private Ship ship;
 
     @ManyToMany
+    @JsonIgnoreProperties({"pirates"})
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "pirates_raids",
             joinColumns = {
