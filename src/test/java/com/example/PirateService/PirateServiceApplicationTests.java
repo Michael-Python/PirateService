@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @AutoConfigureTestDatabase
 @SpringBootTest
 class PirateserviceD1StarterApplicationTests {
@@ -53,5 +57,11 @@ class PirateserviceD1StarterApplicationTests {
 
 	}
 
+	@Test
+	public void canFindPiratesOver50() {
+		List<Pirate> found = pirateRepository.findByAgeGreaterThan(50);
+
+		assertEquals(2, found.size());
+	}
 }
 
